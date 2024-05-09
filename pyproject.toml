@@ -2,7 +2,7 @@
 name = "ofxstatement-qif"
 version = "0.1.0+0"
 authors = [
-    {name = "Robert V", email = "robertv@segence.com"},
+    {name = "R Vadai", email = "rvadai@segence.com"},
 ]
 description = "ofxstatement plugin for QIF files"
 readme = "README.md"
