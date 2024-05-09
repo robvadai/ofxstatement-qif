@@ -1,0 +1,22 @@
+[project]
+name = "ofxstatement-qif"
+version = "0.1.0+0"
+authors = [
+    {name = "Robert V", email = "robertv@segence.com"},
+]
+description = "ofxstatement plugin for QIF files"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+]
+dependencies = [
+    "ofxstatement==0.9.1",
+    "quiffen==2.0.10",
+]
