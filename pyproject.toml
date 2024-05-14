@@ -1,6 +1,6 @@
 [project]
 name = "ofxstatement-qif"
-version = "0.1.0+0"
+dynamic = ["version"]
 authors = [
     {name = "R Vadai", email = "rvadai@segence.com"},
 ]
@@ -32,13 +32,15 @@ dev = [
 ]
 [project.urls]
 repository = "https://github.com/robvadai/ofxstatement-qif"
-
 [tool.setuptools.packages.find]
 where = ["src"]
 exclude = ["test*"]
-
 [tool.pytest.ini_options]
 addopts = "--strict-markers"
 markers = [
     "integration: marks tests as integration tests",
 ]
+[build-system]
+requires = ["setuptools>=69", "setuptools_scm>=8"]
+build-backend = "setuptools.build_meta"
+[tool.setuptools_scm]
