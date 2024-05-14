@@ -17,6 +17,26 @@ classifiers = [
     "Programming Language :: Python :: 3.9",
 ]
 dependencies = [
-    "ofxstatement==0.9.1",
     "quiffen==2.0.10",
+]
+[project.optional-dependencies]
+dev = [
+    "ofxstatement==0.9.1",
+    "pytest==8.2.0",
+    "prospector==1.10.3",
+    "bandit==1.7.8",
+    "setuptools==69.5.1",
+    "build==1.2.1"
+]
+[project.urls]
+repository = "https://github.com/robvadai/ofxstatement-qif"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+exclude = ["test*"]
+
+[tool.pytest.ini_options]
+addopts = "--strict-markers"
+markers = [
+    "integration: marks tests as integration tests",
 ]
