@@ -5,7 +5,7 @@ from typing import Dict, Optional, Iterable, Tuple
 from ofxstatement.parser import StatementParser
 from ofxstatement.plugin import Plugin
 from ofxstatement.statement import (StatementLine,
-                                    generate_transaction_id)
+                                    generate_transaction_id, Currency)
 from quiffen import Qif
 from quiffen.core.account import AccountType
 from quiffen.core.transaction import Transaction
@@ -18,7 +18,25 @@ class QIFPlugin(Plugin):
     """QIF file parser"""
 
     def get_parser(self, filename: str) -> "QIFParser":
-        return QIFParser(path=filename)
+
+        kwargs = {}
+
+        if "day-first" in self.settings:
+            kwargs["day_first"] = True
+
+        if "separator" in self.settings:
+            kwargs["separator"] = self.settings["separator"]
+
+        if "encoding" in self.settings:
+            kwargs["encoding"] = self.settings["encoding"]
+
+        if "account" in self.settings:
+            kwargs["account_name"] = self.settings["account"]
+
+        if "currency" in self.settings:
+            kwargs["currency"] = self.settings["currency"]
+
+        return QIFParser(path=filename, **kwargs)
 
 
 class QIFParser(StatementParser):
@@ -29,6 +47,7 @@ class QIFParser(StatementParser):
     day_first: bool
     encoding: str
     account_name: str
+    currency: Optional[str]
 
     # 0-based csv column mapping to StatementLine field
     mappings: Dict[str, int] = {}
@@ -39,7 +58,8 @@ class QIFParser(StatementParser):
         separator: str = '\n',
         day_first: bool = False,
         encoding: str = 'utf-8',
-        account_name: str = 'Quiffen Default Account'
+        account_name: str = 'Quiffen Default Account',
+        currency: Optional[str] = None
     ) -> None:
         """Return a class instance of QIFParser
 
@@ -61,6 +81,7 @@ class QIFParser(StatementParser):
         self.day_first = day_first
         self.encoding = encoding
         self.account_name = account_name
+        self.currency = currency
 
     @staticmethod
     def get_transaction_type(account_type: AccountType) -> str:
@@ -71,14 +92,14 @@ class QIFParser(StatementParser):
         else:
             return 'OTHER'
 
-    def split_records(self) -> Iterable[Tuple[AccountType, Transaction]]:
+    def split_records(self) -> Iterable[Tuple[AccountType, Transaction, Optional[str]]]:
         qif = Qif.parse(self.path, self.separator, self.day_first, self.encoding)
         if self.account_name in qif.accounts:
             account = qif.accounts[self.account_name]
-            return ((account_type, transaction) for account_type, transactions in account.transactions.items() for transaction in transactions)
+            return ((account_type, transaction, self.currency) for account_type, transactions in account.transactions.items() for transaction in transactions)
         return []
 
-    def parse_record(self, line: [AccountType, Transaction]) -> Optional[StatementLine]:
+    def parse_record(self, line: [AccountType, Transaction, Optional[str]]) -> Optional[StatementLine]:
         statement_line = StatementLine(
             date=line[1].date,
             memo=line[1].memo,
@@ -89,5 +110,8 @@ class QIFParser(StatementParser):
         statement_line.date_user = line[1].date
         statement_line.trntype = self.get_transaction_type(line[0])
         statement_line.payee = line[1].payee
+
+        if line[2]:
+            statement_line.currency = Currency(symbol=line[2])
 
         return statement_line
