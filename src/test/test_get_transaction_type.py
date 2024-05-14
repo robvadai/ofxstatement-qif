@@ -1,12 +1,12 @@
 from ..ofxstatement.plugins.qif import QIFParser
 from quiffen.core.account import AccountType
 
-other_transaction_type = 'OTHER'
+other_transaction_type = "OTHER"
 
 expectations = {
-    AccountType.CASH: 'CASH',
-    AccountType.OTH_L: 'DEBIT',
-    AccountType.BANK: other_transaction_type
+    AccountType.CASH: "CASH",
+    AccountType.OTH_L: "DEBIT",
+    AccountType.BANK: other_transaction_type,
 }
 
 

@@ -4,14 +4,13 @@ from typing import Dict, Optional, Iterable, Tuple
 
 from ofxstatement.parser import StatementParser
 from ofxstatement.plugin import Plugin
-from ofxstatement.statement import (StatementLine,
-                                    generate_transaction_id, Currency)
+from ofxstatement.statement import StatementLine, generate_transaction_id, Currency
 from quiffen import Qif
 from quiffen.core.account import AccountType
 from quiffen.core.transaction import Transaction
 
 logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger('QIF')
+logger = logging.getLogger("QIF")
 
 
 class QIFPlugin(Plugin):
@@ -55,11 +54,11 @@ class QIFParser(StatementParser):
     def __init__(
         self,
         path: str,
-        separator: str = '\n',
+        separator: str = "\n",
         day_first: bool = False,
-        encoding: str = 'utf-8',
-        account_name: str = 'Quiffen Default Account',
-        currency: Optional[str] = None
+        encoding: str = "utf-8",
+        account_name: str = "Quiffen Default Account",
+        currency: Optional[str] = None,
     ) -> None:
         """Return a class instance of QIFParser
 
@@ -86,20 +85,26 @@ class QIFParser(StatementParser):
     @staticmethod
     def get_transaction_type(account_type: AccountType) -> str:
         if account_type == AccountType.CASH:
-            return 'CASH'
+            return "CASH"
         elif account_type == AccountType.OTH_L:
-            return 'DEBIT'
+            return "DEBIT"
         else:
-            return 'OTHER'
+            return "OTHER"
 
     def split_records(self) -> Iterable[Tuple[AccountType, Transaction, Optional[str]]]:
         qif = Qif.parse(self.path, self.separator, self.day_first, self.encoding)
         if self.account_name in qif.accounts:
             account = qif.accounts[self.account_name]
-            return ((account_type, transaction, self.currency) for account_type, transactions in account.transactions.items() for transaction in transactions)
+            return (
+                (account_type, transaction, self.currency)
+                for account_type, transactions in account.transactions.items()
+                for transaction in transactions
+            )
         return []
 
-    def parse_record(self, line: [AccountType, Transaction, Optional[str]]) -> Optional[StatementLine]:
+    def parse_record(
+        self, line: [AccountType, Transaction, Optional[str]]
+    ) -> Optional[StatementLine]:
         statement_line = StatementLine(
             date=line[1].date,
             memo=line[1].memo,
