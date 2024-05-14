@@ -5,12 +5,20 @@ on:
   pull_request:
 jobs:
   test:
-    runs-on: python:3.12.3-bullseye
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [ "3.12" ]
     steps:
     - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
-        pip install coveralls
+        python -m pip install --upgrade pip
+        python -m pip install coveralls
         make install
     - name: Code formatting
       run: make code-format
@@ -29,12 +37,15 @@ jobs:
       run: coveralls --service=github
   report:
     needs: test
-    runs-on: python:3.12.3-bullseye
+    runs-on: ubuntu-latest
     steps:
+    - name: Set up Python
+      uses: actions/setup-python@v2
     - name: Coveralls Finish
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN}}
       run: |
-        pip install coveralls
-        coveralls --service=github --finish
+        python -m pip install --upgrade pip
+        python -m pip install coveralls
+        python -m coveralls --service=github --finish
