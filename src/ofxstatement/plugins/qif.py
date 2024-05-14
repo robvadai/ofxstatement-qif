@@ -48,9 +48,6 @@ class QIFParser(StatementParser):
     account_name: str
     currency: Optional[str]
 
-    # 0-based csv column mapping to StatementLine field
-    mappings: Dict[str, int] = {}
-
     def __init__(
         self,
         path: str,
