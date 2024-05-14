@@ -70,6 +70,10 @@ class QIFParser(StatementParser):
             Whether the day or month comes first in the date.
         encoding : str, default='utf-8'
             The encoding of the QIF file.
+        account_name : str, default='Quiffen Default Account'
+            The account name to extract transactions from.
+        currency : Optional[str], default=None
+            The currency used for the transactions.
         """
         super().__init__()
         self.path = path
