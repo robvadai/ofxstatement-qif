@@ -1,0 +1,40 @@
+name: ofxstatement-qif
+on:
+  push:
+    branches: main
+  pull_request:
+jobs:
+  test:
+    runs-on: python:3.12.3-bullseye
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: |
+        pip install coveralls
+        make install
+    - name: Code formatting
+      run: make code-format
+    - name: Unit testing
+      run: make unit-test
+    - name: Integration testing
+      run: make integration-test
+    - name: Security Analysis
+      run: make security-analysis file=src/ofxstatement
+    - name: Coveralls
+      if: ${{ success() }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN}}
+        COVERALLS_PARALLEL: true
+      run: coveralls --service=github
+  report:
+    needs: test
+    runs-on: python:3.12.3-bullseye
+    steps:
+    - name: Coveralls Finish
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN}}
+      run: |
+        pip install coveralls
+        coveralls --service=github --finish
