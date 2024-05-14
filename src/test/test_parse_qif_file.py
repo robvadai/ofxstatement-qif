@@ -1,7 +1,9 @@
-import pytest
 import tempfile
 from datetime import datetime
 from decimal import Decimal
+
+import pytest
+
 from ofxstatement.ui import UI
 
 from ..ofxstatement.plugins.qif import QIFPlugin
