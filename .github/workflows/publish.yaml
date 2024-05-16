@@ -18,6 +18,12 @@ jobs:
         make install
     - name: Build a binary wheel
       run: make build
+    - name: Sign the dists with Sigstore
+      uses: sigstore/gh-action-sigstore-python@v2.1.1
+      with:
+        inputs: >-
+          ./dist/*.tar.gz
+          ./dist/*.whl
     - name: Store the distribution packages
       uses: actions/upload-artifact@v4
       with:
