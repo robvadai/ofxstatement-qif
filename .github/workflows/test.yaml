@@ -52,6 +52,7 @@ jobs:
   tag:
     needs: test
     runs-on: ubuntu-latest
+    steps:
     - name: Bump version and push tag
       uses: anothrNick/github-tag-action@v1
       env:
