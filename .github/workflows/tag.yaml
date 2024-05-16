@@ -1,11 +1,13 @@
 name: tag
 on:
   workflow_run:
-    workflows: ["test"]
+    workflows:
+    - test
     branches:
     - main
     - dev
-    types: [completed]
+    types:
+    - completed
 jobs:
   tag:
     name: Tag the repository

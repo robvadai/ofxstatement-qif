@@ -52,18 +52,3 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install coveralls
         python -m coveralls --service=github --finish
-  tag:
-    needs: test
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: '0'
-    - name: Bump version and push tag
-      uses: anothrNick/github-tag-action@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        WITH_V: true
-        PRERELEASE_SUFFIX: snapshot
