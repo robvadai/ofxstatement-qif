@@ -25,11 +25,18 @@ jobs:
       with:
         inputs: >-
           ./dist/*.whl
+    - name: Upload artifact signatures to GitHub Release
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      run: >-
+        gh release upload
+        '${{ github.ref_name }}' dist/**
+        --repo '${{ github.repository }}'
     - name: Store the distribution packages
       uses: actions/upload-artifact@v4
       with:
         name: python-package-distributions
-        path: dist/
+        path: dist/*.whl
 #   publish-to-pypi:
 #     name: >-
 #       Publish Python 🐍 distribution 📦 to PyPI
