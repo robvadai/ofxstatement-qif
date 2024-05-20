@@ -7,4 +7,25 @@ OFX Statement QIF plugin
 
 ## Summary
 
-Converts QIF formatted bank transaction files.
+Converts [Quicken Interchange Format (QIF)](https://en.wikipedia.org/wiki/Quicken_Interchange_Format) formatted bank transaction files to [Open Financial Exchange (OFX)](https://en.wikipedia.org/wiki/Open_Financial_Exchange) format.
+
+It is a plugin for [ofxstatement](https://github.com/kedder/ofxstatement).
+
+## Usage
+```shell
+$ ofxstatement convert -t qif transactions.qiv transactions.ofx
+```
+## Configuration
+```shell
+$ ofxstatement edit-config
+```
+And enter e.g. this:
+```
+[qif]
+plugin = qif
+currency = USD
+account = Quiffen Default Account
+separator = \n
+day-first = true
+encoding = utf-8
+```
