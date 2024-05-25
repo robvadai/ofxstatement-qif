@@ -1,4 +1,4 @@
-from ..ofxstatement.plugins.qif import QIFParser
+from ..ofxstatement_qif.plugin import QIFParser
 from quiffen.core.account import AccountType
 
 other_transaction_type = "OTHER"

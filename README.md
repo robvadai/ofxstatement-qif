@@ -13,7 +13,7 @@ It is a plugin for [ofxstatement](https://github.com/kedder/ofxstatement).
 
 ## Usage
 ```shell
-$ ofxstatement convert -t qif transactions.qiv transactions.ofx
+$ ofxstatement convert -t qif transactions.qif transactions.ofx
 ```
 ## Configuration
 ```shell

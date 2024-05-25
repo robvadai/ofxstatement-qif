@@ -32,6 +32,8 @@ dev = [
 ]
 [project.urls]
 repository = "https://github.com/robvadai/ofxstatement-qif"
+[project.entry-points."ofxstatement"]
+qif = "ofxstatement_qif.plugin:QIFPlugin"
 [tool.setuptools.packages.find]
 where = ["src"]
 exclude = ["test*"]

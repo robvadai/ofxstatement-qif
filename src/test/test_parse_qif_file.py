@@ -6,7 +6,7 @@ import pytest
 
 from ofxstatement.ui import UI
 
-from ..ofxstatement.plugins.qif import QIFPlugin
+from ..ofxstatement_qif.plugin import QIFPlugin
 
 QIF_FILE_CONTENT = """!Type:Oth L
 D30/03/2024
