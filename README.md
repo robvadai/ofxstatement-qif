@@ -14,23 +14,23 @@ It is a plugin for [ofxstatement](https://github.com/kedder/ofxstatement).
 ## Installation
 
 ```shell
-$ pip install ofxstatement-qif
+pip install ofxstatement-qif
 ```
 
 ## Usage
 
 ```shell
-$ ofxstatement convert -t qif transactions.qif transactions.ofx
+ofxstatement convert -t qif transactions.qif transactions.ofx
 ```
 
 ## Configuration
 
 ```shell
-$ ofxstatement edit-config
+ofxstatement edit-config
 ```
 
 And enter e.g. this:
-```
+```ini
 [qif]
 plugin = qif
 currency = USD
