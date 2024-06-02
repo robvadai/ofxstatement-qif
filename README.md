@@ -11,14 +11,24 @@ Converts [Quicken Interchange Format (QIF)](https://en.wikipedia.org/wiki/Quicke
 
 It is a plugin for [ofxstatement](https://github.com/kedder/ofxstatement).
 
+## Installation
+
+```shell
+$ pip install ofxstatement-qif
+```
+
 ## Usage
+
 ```shell
 $ ofxstatement convert -t qif transactions.qif transactions.ofx
 ```
+
 ## Configuration
+
 ```shell
 $ ofxstatement edit-config
 ```
+
 And enter e.g. this:
 ```
 [qif]
