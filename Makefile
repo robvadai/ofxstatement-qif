@@ -35,7 +35,6 @@ integration-test:
 code-format:
 	@black .
 
-
 .PHONY: static-analysis # Runs static analysis
 static-analysis:
 	@prospector --profile ./prospector.yaml src
