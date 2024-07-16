@@ -1,6 +1,6 @@
 import logging
 from decimal import Decimal
-from typing import Dict, Optional, Iterable, Tuple
+from typing import Optional, Iterable, Tuple
 
 from ofxstatement.parser import StatementParser
 from ofxstatement.plugin import Plugin
