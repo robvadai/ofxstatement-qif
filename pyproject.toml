@@ -17,7 +17,8 @@ classifiers = [
     "Programming Language :: Python :: 3.9",
 ]
 dependencies = [
-    "quiffen==2.0.10",
+    "quiffen==2.0.11",
+    "pydantic==1.10.17"
 ]
 [project.optional-dependencies]
 dev = [
