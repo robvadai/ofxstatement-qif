@@ -1,1 +1,6 @@
 autodetect: false
+pycodestyle:
+  options:
+    max-line-length: 120
+pylint:
+  run: false

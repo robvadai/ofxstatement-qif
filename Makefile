@@ -21,7 +21,7 @@ build:
 
 .PHONY: test # Runs tests; optional arguments:~selector=[test selector expression]: only run tests which match the given substring expression. An expression is a python evaluatable expression where all names are substring-matched against test names and their parent classes. Example: 'test_method or test_other' matches all test functions and classes whose name contains 'test_method' or 'test_other', while 'not test_method' matches those that don't contain 'test_method' in their names.
 test:
-	@pytest --cache-clear --capture=no $(TEST_SELECTOR_OPTS) -m "$(marker)" --cov=src --cov-append ./src
+	@pytest --cache-clear --capture=no $(TEST_SELECTOR_OPTS) -m "$(marker)" --cov=src --cov-append --cov-report xml:coverage.xml ./src
 
 .PHONY: unit-test # Runs unit tests; optional arguments:~selector=[test selector expression]: only run tests which match the given substring expression. An expression is a python evaluatable expression where all names are substring-matched against test names and their parent classes. Example: 'test_method or test_other' matches all test functions and classes whose name contains 'test_method' or 'test_other', while 'not test_method' matches those that don't contain 'test_method' in their names.
 unit-test:
@@ -41,7 +41,7 @@ static-analysis:
 
 .PHONY: security-analysis # Runs security analysis looking for vulnerabilities in code; required arguments:~file=[file path]: the file to analyze
 security-analysis:
-	@bandit -r $(file)
+	@bandit -r src -x src/test
 
 .PHONY: clean # Cleans up build directories
 clean:
