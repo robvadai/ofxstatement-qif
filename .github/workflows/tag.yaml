@@ -24,4 +24,5 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: true
-        PRERELEASE_SUFFIX: snapshot
+        PRERELEASE_SUFFIX: dev
+        PRERELEASE: ${{ github.ref_name != 'main' }}
