@@ -1,6 +1,11 @@
 autodetect: false
-pycodestyle:
-  options:
-    max-line-length: 120
+max-line-length: 120
+dodgy:
+  run: true
 pylint:
-  run: false
+  run: true
+  disable:
+  - too-many-arguments
+  - too-many-positional-arguments
+mypy:
+  run: true

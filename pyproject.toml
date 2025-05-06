@@ -17,20 +17,20 @@ classifiers = [
     "Programming Language :: Python :: 3.9",
 ]
 dependencies = [
-    "quiffen==2.0.11",
-    "pydantic==1.10.17",
+    "quiffen==3.0.0",
+    "pydantic==2.10.6",
     "numpy==1.26.4"
 ]
 [project.optional-dependencies]
 dev = [
-    "ofxstatement==0.9.1",
-    "pytest==8.2.0",
-    "pytest-cov==5.0.0",
-    "prospector==1.10.3",
-    "bandit==1.7.8",
+    "ofxstatement==0.9.2",
+    "pytest==8.3.5",
+    "pytest-cov==6.1.1",
+    "prospector[with_mypy]==1.16.1",
+    "bandit==1.8.3",
     "setuptools==69.5.1",
     "build==1.2.1",
-    "black==24.4.2"
+    "black==25.1.0"
 ]
 [project.urls]
 repository = "https://github.com/robvadai/ofxstatement-qif"
