@@ -1,8 +1,8 @@
 import logging
 from decimal import Decimal
-from typing import Optional, Iterable, Tuple
+from typing import Optional, Iterable, Tuple, Any
 
-from ofxstatement.parser import StatementParser
+from ofxstatement.parser import StatementParser, LT
 from ofxstatement.plugin import Plugin
 from ofxstatement.statement import StatementLine, generate_transaction_id, Currency
 from quiffen import Qif
@@ -18,7 +18,7 @@ class QIFPlugin(Plugin):
 
     def get_parser(self, filename: str) -> "QIFParser":
 
-        kwargs = {}
+        kwargs: dict[str, Any] = {}
 
         if "day-first" in self.settings:
             kwargs["day_first"] = True
@@ -87,10 +87,9 @@ class QIFParser(StatementParser):
     def get_transaction_type(account_type: AccountType) -> str:
         if account_type == AccountType.CASH:
             return "CASH"
-        elif account_type == AccountType.OTH_L:
+        if account_type == AccountType.OTH_L:
             return "DEBIT"
-        else:
-            return "OTHER"
+        return "OTHER"
 
     def split_records(self) -> Iterable[Tuple[AccountType, Transaction, Optional[str]]]:
         qif = Qif.parse(self.path, self.separator, self.day_first, self.encoding)
@@ -104,7 +103,7 @@ class QIFParser(StatementParser):
         return []
 
     def parse_record(
-        self, line: [AccountType, Transaction, Optional[str]]
+        self, line: LT
     ) -> Optional[StatementLine]:
         statement_line = StatementLine(
             date=line[1].date,
