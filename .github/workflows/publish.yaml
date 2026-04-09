@@ -26,13 +26,13 @@ jobs:
       with:
         inputs: >-
           ./dist/*.whl
-    - name: Upload artifact signatures to GitHub Release
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-      run: >-
-        gh release upload
-        '${{ github.ref_name }}' dist/**
-        --repo '${{ github.repository }}'
+    # - name: Upload artifact signatures to GitHub Release
+    #   env:
+    #     GITHUB_TOKEN: ${{ github.token }}
+    #   run: >-
+    #     gh release upload
+    #     '${{ github.ref_name }}' dist/**
+    #     --repo '${{ github.repository }}'
     - name: Store the distribution packages
       uses: actions/upload-artifact@v6
       with:
