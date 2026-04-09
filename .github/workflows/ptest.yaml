@@ -1,6 +1,11 @@
 name: ptest
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to deploy (e.g., v1.2.3 or commit SHA)'
+        required: true
+        type: string
 jobs:
   build:
     name: Build distribution 📦
