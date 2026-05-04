@@ -1,0 +1,14 @@
+pre = "dev.*"
+branch_whitelist = ["main", "dev"]
+skip_ci = "[skip ci]"
+skip_untracked = false
+ignore_merge_commits = true
+tag_prefix = "v"
+
+post_bump_hooks = [
+  "git push",
+  "git push origin {{version_tag}}"
+]
+
+[changelog]
+path = "CHANGELOG.md"

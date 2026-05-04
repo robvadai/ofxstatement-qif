@@ -19,8 +19,9 @@ jobs:
     - uses: actions/checkout@v6
       with:
         fetch-depth: 0
-    - uses: cocogitto/cocogitto-action@main
+    - uses: cocogitto/cocogitto-action@v4
       with:
-        release: true
+        command: bump
+        args: --auto --skip-ci ${{ github.ref_name == 'dev' && ' --pre' || '' }}
         git-user: github-action
         git-user-email: 'github-actions@github.com'
