@@ -19,7 +19,7 @@ jobs:
     - uses: actions/checkout@v6
       with:
         fetch-depth: 0
-    - uses: cocogitto/cocogitto-action@v4
+    - uses: cocogitto/cocogitto-action@v4.2.0
       with:
         command: bump
         args: --auto --skip-ci ${{ github.ref_name == 'dev' && ' --pre' || '' }}
