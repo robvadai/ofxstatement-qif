@@ -1,4 +1,4 @@
-name: tag
+name: release
 on:
   workflow_run:
     workflows:
@@ -9,8 +9,8 @@ on:
     types:
     - completed
 jobs:
-  tag:
-    name: Tag the repository
+  release:
+    name: Release the repository
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     permissions:
