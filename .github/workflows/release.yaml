@@ -22,6 +22,6 @@ jobs:
     - uses: cocogitto/cocogitto-action@v4
       with:
         command: bump
-        args: --auto --skip-ci ${{ github.ref_name == 'dev' && ' --pre-release' || '' }}
+        args: --auto --skip-ci ${{ github.ref_name == 'dev' && ' --pre' || '' }}
         git-user: github-action
         git-user-email: 'github-actions@github.com'
