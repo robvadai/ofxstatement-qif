@@ -19,9 +19,8 @@ jobs:
     - uses: actions/checkout@v6
       with:
         fetch-depth: 0
-    - name: Semver release
-        uses: cocogitto/cocogitto-action@main
-        with:
-          release: true
-          git-user: github-action
-          git-user-email: 'github-actions@github.com'
+    - uses: cocogitto/cocogitto-action@main
+      with:
+        release: true
+        git-user: github-action
+        git-user-email: 'github-actions@github.com'
