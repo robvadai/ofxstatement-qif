@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file. See [conven
 - - -
 ## v0.15.0 - 2026-05-04
 #### Features
+- upgrade - (3990e09) - R Vadai
+- branch (#13) - (1b7eb1b) - Rob Vadai
+- release process (#10) - (effdeb7) - Rob Vadai
+#### Bug Fixes
+- release (#12) - (287ad6e) - Rob Vadai
+- syntax (#11) - (3ce680f) - Rob Vadai
+#### Miscellaneous Chores
+- (**version**) v0.15.0 [skip ci] - (119c8ef) - R Vadai
+
+- - -
+
+## v0.15.0 - 2026-05-04
+#### Features
 - branch (#13) - (1b7eb1b) - Rob Vadai
 - release process (#10) - (effdeb7) - Rob Vadai
 #### Bug Fixes
